@@ -1,0 +1,24 @@
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+sqlalchemy==2.0.30
+psycopg2-binary==2.9.9
+alembic==1.13.1
+pydantic==2.7.1
+pydantic-settings==2.2.1
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1
+python-multipart==0.0.9
+python-dotenv==1.0.1
+langchain==0.2.1
+langchain-openai==0.1.7
+langchain-community==0.2.1
+sentence-transformers==2.7.0
+langchain-groq==0.1.9
+boto3==1.34.100
+slowapi==0.1.9
+pytest==8.2.0
+httpx==0.27.0
+pgvector==0.2.5
+pip install -U accelerate
+langgraph==0.1.5

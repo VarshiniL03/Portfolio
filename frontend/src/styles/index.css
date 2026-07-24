@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --signal-color: #E8A33D;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+body {
+  @apply bg-ink text-paper font-body antialiased;
+}
+
+.dark body {
+  @apply bg-ink text-paper;
+}
+
+body.light {
+  @apply bg-paper text-ink;
+}
+
+/* Signature element: the vertical "signal line" that runs behind section
+   markers on the homepage, connecting Experience -> Projects -> Qualifications. */
+
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--signal-color);
+  outline-offset: 2px;
+}
