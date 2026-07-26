@@ -1,26 +1,42 @@
 """
-Local embedding generation using sentence-transformers — no API key, no
-cost, runs entirely on your machine. Model downloads once (~90MB) on first use.
+Embedding generation via Cohere's hosted API — deliberately NOT using a
+local model (sentence-transformers/torch) here, since that combination is
+too memory-heavy for free-tier hosting (Render's 512MB limit). Cohere's
+embed-english-light-v3.0 model outputs 384-dim vectors, matching our
+existing database schema exactly.
 """
-from sentence_transformers import SentenceTransformer
+import cohere
 
-_model = None
+from app.core.config import settings
 
-def _get_model():
-    global _model
-    if _model is None:
-        _model = SentenceTransformer("all-MiniLM-L6-v2")  # 384-dimensional embeddings
-    return _model
+_client = None
+
+
+def _get_client():
+    global _client
+    if _client is None:
+        _client = cohere.Client(settings.COHERE_API_KEY)
+    return _client
 
 
 def get_embedding(text: str) -> list[float]:
-    model = _get_model()
-    return model.encode(text.replace("\n", " ").strip()).tolist()
+    client = _get_client()
+    response = client.embed(
+        texts=[text.replace("\n", " ").strip()],
+        model="embed-english-light-v3.0",
+        input_type="search_document",
+    )
+    return response.embeddings[0]
 
 
 def get_embeddings_batch(texts: list[str]) -> list[list[float]]:
     if not texts:
         return []
-    model = _get_model()
+    client = _get_client()
     cleaned = [t.replace("\n", " ").strip() for t in texts]
-    return model.encode(cleaned).tolist()
+    response = client.embed(
+        texts=cleaned,
+        model="embed-english-light-v3.0",
+        input_type="search_document",
+    )
+    return response.embeddings
