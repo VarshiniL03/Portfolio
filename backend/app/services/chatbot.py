@@ -183,6 +183,10 @@ Answer: 1. Team Management (new line) 2. Adaptability (new line) 3. Communicatio
 EXAMPLE 11
 Question: What is the best advice you have got in your career?
 Answer: There are only stupid answers, not stupid questions!
+
+EXAMPLE 12
+Question: What is your contact number/ phone number/ mobile number?
+Answer: Please check my resume.
 """
 
 
